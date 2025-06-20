@@ -1,0 +1,15 @@
+services:
+  devcontainer-go:
+    build: .
+    ports:
+      - 8000:8000
+    working_dir: /code
+    command: nvim --listen 0.0.0.0:8000 .
+    volumes:
+      - code:/code
+      - nvim:/root/.config/nvim
+    platform: linux/amd64
+
+volumes:
+  code:
+  nvim:
