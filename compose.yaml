@@ -7,6 +7,7 @@ services:
       - "3500:3500" # Dapr API
       - "50001:50001" # Dapr gRPC
       - "50002:50002" # Dapr internal gRPC
+      - "9411:9411" # zipking (dapr init --dev )
     restart: unless-stopped
     privileged: true
     working_dir: /code
