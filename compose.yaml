@@ -2,14 +2,25 @@ services:
   devcontainer-go:
     build: .
     ports:
-      - 8000:8000
+      - "7777:7777" #neovim
+      - "2375:2375" #docker daemon
+      - "3500:3500" # Dapr API
+      - "50001:50001" # Dapr gRPC
+      - "50002:50002" # Dapr internal gRPC
+    restart: unless-stopped
+    privileged: true
     working_dir: /code
-    command: nvim --listen 0.0.0.0:8000 .
     volumes:
       - code:/code
       - nvim:/root/.config/nvim
+      - dind-storage:/var/lib/docker
     platform: linux/amd64
+    environment:
+      - DOCKER_TLS_CERTDIR=
+      #   - DOCKER_HOST=tcp://localhost:2375
+      - DOCKER_HOST=unix:///var/run/docker.sock
 
 volumes:
   code:
   nvim:
+  dind-storage:

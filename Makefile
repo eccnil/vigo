@@ -1,6 +1,6 @@
 edit: .make_compose
 	docker compose start
-	nvim --server 127.0.0.1:8000 --remote-ui
+	nvim --server 127.0.0.1:7777 --remote-ui
 
 .make_image: dockerfile
 	docker compose build
